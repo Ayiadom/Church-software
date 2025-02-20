@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('im/meth.JPG'); /* Background image */
+    background-size: 20%; /* Ensures the image covers the entire background */
+    background-position: left; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Keeps the background fixed while scrolling */
+    color: white; /* Change text color to white for better visibility */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Ensures form stays at the top */
+    height: 100vh;
+    position: relative;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: blue;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: blue;
+}
+
+form {
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    box-sizing: border-box;
+    position: sticky;
+    top: 20px; /* Keeps the form visible even as the user scrolls */
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.8); /* Ensures form background remains visible */
+}
+
+input, button {
+    padding: 10px;
+    margin: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    cursor: pointer;
+    background-color: #efbd09;
+    color: white;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #f00b2d;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: rgb(44, 82, 220);
+    max-height: 300px; /* Limit the height of the table */
+    overflow-y: auto; /* Allow scrolling when data grows */
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Keep table headers fixed while scrolling */
+th {
+    background-color: #f2f2f2;
+    position: sticky;
+    top: 0;
+    z-index: 1; /* Ensures header stays on top */
+}
+a button {
+    position: fixed; /* Fixed positioning keeps the button in place even when scrolling */
+    top: 20px; /* Position it 20px from the top */
+    right: 20px; /* Position it 20px from the right */
+    padding: 10px 20px; /* Add some padding to the button */
+    font-size: 16px; /* Adjust the font size */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* Remove the border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change the cursor on hover */
+}

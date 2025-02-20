@@ -1,0 +1,107 @@
+<?php
+include 'db.php';
+
+// Handle Create (INSERT)
+if (isset($_POST['create'])) {
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $reason = $_POST['reason'];
+    $member_name = $_POST['member_name'];
+    $phonenumber = $_POST['phonenumber'];
+    $residence = $_POST['residence'];
+    $hometown = $_POST['hometown'];
+    $maritalstatus = $_POST['maritalstatus'];
+    $visit_date = $_POST['visit_date']; // New date field
+    
+    $sql = "INSERT INTO visitors (firstname, lastname, reason, member_name, phonenumber, residence, hometown, maritalstatus, visit_date) 
+            VALUES ('$firstname', '$lastname', '$reason', '$member_name', '$phonenumber', '$residence', '$hometown', '$maritalstatus', '$visit_date')";
+    
+    if ($conn->query($sql) === TRUE) {
+        echo "New visitor record created successfully!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+// Fetch all visitors for display
+$sql = "SELECT * FROM visitors";
+$result = $conn->query($sql);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Visitor Management</h1>
+    
+    <form method="POST">
+        <input type="text" name="firstname" placeholder="First Name" required>
+        <input type="text" name="lastname" placeholder="Last Name" required>
+        
+        <!-- Reason for Visit Dropdown -->
+        <select name="reason" required>
+            <option value="" disabled selected>Select Reason for Visit</option>
+            <option value="To worship with us">To worship with us</option>
+            <option value="Just a visit">Just a visit</option>
+        </select>
+        
+        <input type="text" name="member_name" placeholder="Member Came With" required>
+        <input type="text" name="phonenumber" placeholder="Phone Number" required>
+        <input type="text" name="residence" placeholder="Residence" required>
+        <input type="text" name="hometown" placeholder="Hometown" required>
+        
+        <!-- Marital Status Dropdown -->
+        <select name="maritalstatus" required>
+            <option value="" disabled selected>Select Marital Status</option>
+            <option value="Single">Single</option>
+            <option value="Married">Married</option>
+            <option value="Divorced">Divorced</option>
+            <option value="Widowed">Widowed</option>
+        </select>
+
+        <!-- Visit Date -->
+        <input type="date" name="visit_date" placeholder="Date of Visit" required>
+        
+        <button type="submit" name="create">Create</button>
+    </form>
+
+    <h2>Visitor List</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Reason</th>
+            <th>Member Came With</th>
+            <th>Phone Number</th>
+            <th>Residence</th>
+            <th>Hometown</th>
+            <th>Marital Status</th>
+            <th>Date of Visit</th>
+            <th>Created At</th>
+        </tr>
+        <?php while($row = $result->fetch_assoc()): ?>
+            <tr>
+                <td><?php echo $row['id']; ?></td>
+                <td><?php echo $row['firstname']; ?></td>
+                <td><?php echo $row['lastname']; ?></td>
+                <td><?php echo $row['reason']; ?></td>
+                <td><?php echo $row['member_name']; ?></td>
+                <td><?php echo $row['phonenumber']; ?></td>
+                <td><?php echo $row['residence']; ?></td>
+                <td><?php echo $row['hometown']; ?></td>
+                <td><?php echo $row['maritalstatus']; ?></td>
+                <td><?php echo $row['visit_date']; ?></td>
+                <td><?php echo $row['created_at']; ?></td>
+            </tr>
+        <?php endwhile; ?>
+    </table>
+</body>
+</html>
+
+<?php $conn->close(); ?>
